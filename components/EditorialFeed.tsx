@@ -74,41 +74,6 @@ function StoryChoice({
   );
 }
 
-function TopicBar({
-  articles,
-  selected,
-}: {
-  articles: Article[];
-  selected: string;
-}) {
-  const categories = useMemo(
-    () =>
-      Array.from(new Set(articles.map((article) => article.category))).sort(),
-    [articles],
-  );
-  return (
-    <nav className="topic-bar" aria-label="Story topics">
-      <div>
-        <Link className={selected === 'latest' ? 'active' : ''} href="/">
-          Latest
-        </Link>
-        {categories.map((category) => {
-          const slug = categorySlug(category);
-          return (
-            <Link
-              className={selected === slug ? 'active' : ''}
-              href={`/${slug}`}
-              key={category}
-            >
-              {category}
-            </Link>
-          );
-        })}
-      </div>
-    </nav>
-  );
-}
-
 function FeedSkeleton() {
   return (
     <div className="editorial-shell skeleton" aria-label="Loading stories">
@@ -223,7 +188,6 @@ export function EditorialFeed({ topic = 'latest' }: { topic?: string }) {
         <FeedSkeleton />
       ) : (
         <>
-          <TopicBar articles={articles} selected={selected} />
           {error ? (
             <section className="feed-state error">
               <span>CONNECTION INTERRUPTED</span>

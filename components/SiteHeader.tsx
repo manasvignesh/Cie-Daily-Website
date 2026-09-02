@@ -10,10 +10,6 @@ const links = [
   ['Quick Briefs', '/briefs'],
   ['Full Stories', '/stories'],
   ['Startups', '/startups'],
-  ['Tech', '/technology'],
-  ['AI & ML', '/ai-and-ml'],
-  ['Engineering', '/engineering'],
-  ['India', '/india'],
   ['Spaces', '/spaces'],
 ];
 
