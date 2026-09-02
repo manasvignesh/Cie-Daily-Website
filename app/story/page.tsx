@@ -1,0 +1,26 @@
+import { ArrowLeft, Bookmark, Check, MessageCircle, Share2, UserPlus } from 'lucide-react';
+
+export const metadata = { title: 'India’s small AI labs — CIE Daily', description: 'How local-language models are reshaping India’s AI race.' };
+
+export default function StoryPage(){
+  return <main className="article-page">
+    <header className="article-nav"><a href="/" aria-label="CIE Daily home"><img src="/cie-mascot.png" alt="CIE Daily"/></a><a href="/"><ArrowLeft size={16}/> Back to today</a><div><button><Bookmark size={17}/> Save</button><button><Share2 size={17}/><span>Share</span></button></div></header>
+    <article>
+      <header className="article-hero"><p className="article-category">AI & ML <span>• THE BIG STORY</span></p><h1>India’s small AI labs are building the models Big Tech overlooked</h1><p className="article-hook">A new wave of founders is betting that local languages—not bigger parameters—will decide who wins the next billion users.</p><div className="article-meta"><span>AM</span><p><b>Aanya Menon</b><small>September 2, 2026 · 7 min read</small></p><button><UserPlus size={15}/> Follow</button></div></header>
+      <figure className="article-image"><img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1800&q=88" alt="Abstract artificial intelligence portrait"/><figcaption>A new generation of Indian labs is training smaller systems with deeper local context. <span>Photo: Unsplash</span></figcaption></figure>
+      <div className="article-grid">
+        <aside className="article-rail"><span>IN THIS STORY</span><a href="#point">In 20 Seconds</a><a href="#matters">Why this matters</a><a href="#story-body">Explore the story</a><a href="#picture">Bigger picture</a></aside>
+        <div className="article-body">
+          <section className="twenty-seconds" id="point"><p>IN 20 SECONDS <i>okay, here’s the point</i></p><h2>India’s AI advantage may not be scale. It may be specificity.</h2><ul><li><Check/>Small labs are training models around Indian languages, accents and government datasets.</li><li><Check/>They cost less to run and often outperform global models on tightly defined local tasks.</li><li><Check/>The opportunity is enormous—but clean, representative training data remains the hard part.</li></ul></section>
+          <section className="key-numbers"><p>KEY NUMBERS</p><div><article><strong>22</strong><span>official languages<br/>to build for</span></article><article><strong>₹10K</strong><span>average monthly cost<br/>for a pilot</span></article><article><strong>1.4B</strong><span>people—and many<br/>ways of speaking</span></article></div></section>
+          <section className="prose offset-heading" id="matters"><h2>WHY THIS MATTERS</h2><p>For years, the AI race looked like a contest to build the biggest possible model. That made sense in California. In India, where a voice assistant may need to understand a sentence switching between Hindi, English and Marathi, sheer size solves only part of the problem.</p><p>The smaller labs are making a different bet: context beats scale when the context is specific enough.</p></section>
+          <blockquote>“A farmer does not need a model that can write a sonnet. She needs one that understands her district, her crop and the way she asks a question.”<cite>— Meera Shah, founder of Bhasha Labs</cite></blockquote>
+          <section className="prose" id="story-body"><h2>EXPLORE THE STORY</h2><h3>The local-language gap is a product gap</h3><p>Most global models can translate major Indian languages. Fewer understand how people actually use them—mixed together, spoken informally, and shaped by region. Teams in Bengaluru, Chennai and Hyderabad are building narrow systems for customer support, agricultural advice and public services.</p><p>Instead of scraping the broad internet, these companies work with universities, call centres and local publishers to create smaller, permissioned datasets. The result is less flashy than a general chatbot, but often much more useful.</p><div className="inline-ad"><span>ADVERTISEMENT</span><strong>Ideas need room.</strong><p>Workspace plans for teams who think out loud.</p><a href="#">Explore Linear →</a></div><h3>Small can also mean cheaper</h3><p>A compact model can run on ordinary cloud hardware—or even directly on a phone. That turns a promising demo into software that a clinic, school or neighbourhood shop can actually afford.</p></section>
+          <section className="prose bigger-picture" id="picture"><h2>BIGGER PICTURE</h2><p>India will not win the AI race by copying Silicon Valley’s definition of winning. Its leverage lies in building technology around constraints the rest of the world barely sees.</p><p>That is a harder story to benchmark. It may also be the more important one.</p></section>
+          <section className="you-know"><span>YOU NOW KNOW</span><h2>The smartest model isn’t always the biggest. Sometimes it’s the one that understands where you’re coming from.</h2><p>Still curious? Follow <a href="#">AI & ML</a> for what happens next.</p></section>
+          <div className="article-actions"><button><Bookmark/> Save</button><button><MessageCircle/> Discuss <span>28</span></button><button><Share2/> Share</button></div>
+        </div>
+      </div>
+    </article>
+  </main>;
+}
