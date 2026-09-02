@@ -1,50 +1,517 @@
 'use client';
 
-import { ArrowRight, ArrowUpRight, Bookmark, Check, ChevronRight, Headphones, Menu, MessageCircle, Moon, Play, Search, Sparkles, Sun, Users, X, Zap } from 'lucide-react';
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Bookmark,
+  Check,
+  ChevronRight,
+  Headphones,
+  Menu,
+  MessageCircle,
+  Moon,
+  Play,
+  Search,
+  Sparkles,
+  Sun,
+  Users,
+  X,
+  Zap,
+} from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 const briefs = [
-  { tag:'TECH', time:'2 min', title:'Your phone may soon warn you before an app wastes your battery', note:'the useful bit', tone:'peach' },
-  { tag:'INDIA', time:'90 sec', title:'UPI crossed another record. Here’s the number that matters.', note:'₹24.8T', tone:'yellow' },
-  { tag:'ENGINEERING', time:'3 min', title:'Why developers are suddenly talking about “local-first” software', note:'worth knowing', tone:'blue' },
-  { tag:'AI & ML', time:'2 min', title:'A tiny model just beat systems 10× its size on reasoning', note:'wait, what?', tone:'green' },
+  {
+    tag: 'TECH',
+    time: '2 min',
+    title: 'Your phone may soon warn you before an app wastes your battery',
+    note: 'the useful bit',
+    tone: 'peach',
+  },
+  {
+    tag: 'INDIA',
+    time: '90 sec',
+    title: 'UPI crossed another record. Here’s the number that matters.',
+    note: '₹24.8T',
+    tone: 'yellow',
+  },
+  {
+    tag: 'ENGINEERING',
+    time: '3 min',
+    title: 'Why developers are suddenly talking about “local-first” software',
+    note: 'worth knowing',
+    tone: 'blue',
+  },
+  {
+    tag: 'AI & ML',
+    time: '2 min',
+    title: 'A tiny model just beat systems 10× its size on reasoning',
+    note: 'wait, what?',
+    tone: 'green',
+  },
 ];
 
 const latest = [
-  { tag:'STARTUPS', title:'The quiet comeback of profitable tech companies', desc:'Growth-at-all-costs is out. The spreadsheet is having its main-character moment.', time:'6 min', image:'https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=80' },
-  { tag:'ENGINEERING', title:'What happens when an entire city gets a digital twin?', desc:'Bengaluru’s new simulation project wants to predict floods before the clouds arrive.', time:'8 min', image:'https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=900&q=80' },
-  { tag:'CULTURE × TECH', title:'The internet is learning to be small again', desc:'Private feeds, tiny communities and the end of posting for everyone.', time:'5 min', image:'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80' },
+  {
+    tag: 'STARTUPS',
+    title: 'The quiet comeback of profitable tech companies',
+    desc: 'Growth-at-all-costs is out. The spreadsheet is having its main-character moment.',
+    time: '6 min',
+    image:
+      'https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=80',
+  },
+  {
+    tag: 'ENGINEERING',
+    title: 'What happens when an entire city gets a digital twin?',
+    desc: 'Bengaluru’s new simulation project wants to predict floods before the clouds arrive.',
+    time: '8 min',
+    image:
+      'https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=900&q=80',
+  },
+  {
+    tag: 'CULTURE × TECH',
+    title: 'The internet is learning to be small again',
+    desc: 'Private feeds, tiny communities and the end of posting for everyone.',
+    time: '5 min',
+    image:
+      'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80',
+  },
 ];
 
-function Wordmark() { return <a className="wordmark" href="#top" aria-label="CIE Daily home"><img src="/cie-mascot.png" alt="CIE Daily, winking paper mascot" /></a>; }
+function Wordmark() {
+  return (
+    <a className="wordmark" href="#top" aria-label="CIE Daily home">
+      <img src="/cie-mascot.png" alt="CIE Daily, winking paper mascot" />
+    </a>
+  );
+}
 
 export default function Home() {
-  const [dark,setDark]=useState(false); const [menuOpen,setMenuOpen]=useState(false); const [choice,setChoice]=useState<string|null>(null);
-  useEffect(()=>{const saved=localStorage.getItem('cie-theme')==='dark';setDark(saved)},[]);
-  useEffect(()=>{document.documentElement.classList.toggle('dark',dark);localStorage.setItem('cie-theme',dark?'dark':'light')},[dark]);
-  const ask=(title:string)=>setChoice(title);
+  const [dark, setDark] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [choice, setChoice] = useState<string | null>(null);
+  useEffect(() => {
+    const saved = localStorage.getItem('cie-theme') === 'dark';
+    setDark(saved);
+  }, []);
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', dark);
+    localStorage.setItem('cie-theme', dark ? 'dark' : 'light');
+  }, [dark]);
+  const ask = (title: string) => setChoice(title);
 
-  return <main id="top">
-    <div className="ticker"><span>THE INTERNET, EXPLAINED DAILY</span><p>Wednesday, September 2</p><span>BENGALURU · 26°C</span></div>
-    <header className="site-header"><Wordmark/><nav className={menuOpen?'nav open':'nav'} aria-label="Primary navigation">{['Discover','Quick Briefs','Full Stories','Startups','Tech','AI & ML','Engineering','India','Spaces'].map((item,index)=><a className={index===0?'active':''} href={`#${item.toLowerCase().replaceAll(' ','-')}`} key={item}>{item}</a>)}</nav><div className="header-actions"><button className="icon-button" aria-label="Search"><Search size={19}/></button><button className="icon-button" onClick={()=>setDark(!dark)} aria-label="Toggle dark mode">{dark?<Sun size={19}/>:<Moon size={19}/>}</button><button className="join-button">Join <span>CIE</span></button><button className="mobile-menu" onClick={()=>setMenuOpen(!menuOpen)} aria-label="Open navigation"><Menu/></button></div></header>
-    <div className="page-shell">
-      <section className="intro"><p>Good morning, curious human.</p><h1>Here’s what’s worth knowing <em>today.</em></h1><span>Less noise. More “oh, that makes sense.”</span></section>
-      <section className="lead-grid" aria-label="Top stories"><article className="hero-card"><div className="hero-image-wrap"><img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1600&q=85" alt="A luminous abstract AI face surrounded by data"/><span className="hero-chip">AI & ML</span><span className="hero-note">if you only read one thing ↘</span></div><div className="hero-copy"><p className="eyebrow">THE BIG STORY <span>• 8:42 AM</span></p><h2>India’s small AI labs are building the models Big Tech overlooked</h2><p className="dek">A new wave of founders is betting that local languages—not bigger parameters—will decide who wins the next billion users.</p><div className="byline"><span className="avatar">AM</span><p>By Aanya Menon<br/><small>7 min read · worth your time</small></p><Bookmark size={18}/></div></div><div className="story-choice"><p>How do you want this story? <i>pick your depth</i></p><div><a href="#brief"><Zap size={18}/><span><b>JUST THE POINT</b><small>Quick summary · ~20 sec</small></span><ArrowUpRight/></a><a href="/story"><ArrowUpRight size={18}/><span><b>TAKE ME DEEPER</b><small>Full article · Full context</small></span><ArrowUpRight/></a></div></div></article><aside className="lead-rail"><div className="ad-card"><span>ADVERTISEMENT</span><div className="ad-art">SLOW<br/>DOWN.</div><p>Tools for calmer workdays.</p><a href="#">Meet Pause →</a></div><button className="mini-story" onClick={()=>ask('The 22-year-old building batteries from crop waste')}><span>STARTUPS</span><h3>The 22-year-old building batteries from crop waste</h3><p>4 min read <ArrowUpRight size={16}/></p></button></aside></section>
+  return (
+    <main id="top">
+      <div className="ticker">
+        <span>THE INTERNET, EXPLAINED DAILY</span>
+        <p>Wednesday, September 2</p>
+        <span>BENGALURU · 26°C</span>
+      </div>
+      <header className="site-header">
+        <Wordmark />
+        <nav
+          className={menuOpen ? 'nav open' : 'nav'}
+          aria-label="Primary navigation"
+        >
+          {[
+            'Discover',
+            'Quick Briefs',
+            'Full Stories',
+            'Startups',
+            'Tech',
+            'AI & ML',
+            'Engineering',
+            'India',
+            'Spaces',
+          ].map((item, index) => (
+            <a
+              className={index === 0 ? 'active' : ''}
+              href={`#${item.toLowerCase().replaceAll(' ', '-')}`}
+              key={item}
+            >
+              {item}
+            </a>
+          ))}
+        </nav>
+        <div className="header-actions">
+          <button className="icon-button" aria-label="Search">
+            <Search size={19} />
+          </button>
+          <button
+            className="icon-button"
+            onClick={() => setDark(!dark)}
+            aria-label="Toggle dark mode"
+          >
+            {dark ? <Sun size={19} /> : <Moon size={19} />}
+          </button>
+          <button className="join-button">
+            Join <span>CIE</span>
+          </button>
+          <button
+            className="mobile-menu"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Open navigation"
+          >
+            <Menu />
+          </button>
+        </div>
+      </header>
+      <div className="page-shell">
+        <section className="intro">
+          <p>Good morning, curious human.</p>
+          <h1>
+            Here’s what’s worth knowing <em>today.</em>
+          </h1>
+          <span>Less noise. More “oh, that makes sense.”</span>
+        </section>
+        <section className="lead-grid" aria-label="Top stories">
+          <article className="hero-card">
+            <div className="hero-image-wrap">
+              <img
+                src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1600&q=85"
+                alt="A luminous abstract AI face surrounded by data"
+              />
+              <span className="hero-chip">AI & ML</span>
+              <span className="hero-note">if you only read one thing ↘</span>
+            </div>
+            <div className="hero-copy">
+              <p className="eyebrow">
+                THE BIG STORY <span>• 8:42 AM</span>
+              </p>
+              <h2>
+                India’s small AI labs are building the models Big Tech
+                overlooked
+              </h2>
+              <p className="dek">
+                A new wave of founders is betting that local languages—not
+                bigger parameters—will decide who wins the next billion users.
+              </p>
+              <div className="byline">
+                <span className="avatar">AM</span>
+                <p>
+                  By Aanya Menon
+                  <br />
+                  <small>7 min read · worth your time</small>
+                </p>
+                <Bookmark size={18} />
+              </div>
+            </div>
+            <div className="story-choice">
+              <p>
+                How do you want this story? <i>pick your depth</i>
+              </p>
+              <div>
+                <a href="/brief">
+                  <Zap size={18} />
+                  <span>
+                    <b>JUST THE POINT</b>
+                    <small>Quick summary · ~20 sec</small>
+                  </span>
+                  <ArrowUpRight />
+                </a>
+                <a href="/story">
+                  <ArrowUpRight size={18} />
+                  <span>
+                    <b>TAKE ME DEEPER</b>
+                    <small>Full article · Full context</small>
+                  </span>
+                  <ArrowUpRight />
+                </a>
+              </div>
+            </div>
+          </article>
+          <aside className="lead-rail">
+            <div className="ad-card">
+              <span>ADVERTISEMENT</span>
+              <div className="ad-art">
+                SLOW
+                <br />
+                DOWN.
+              </div>
+              <p>Tools for calmer workdays.</p>
+              <a href="#">Meet Pause →</a>
+            </div>
+            <button
+              className="mini-story"
+              onClick={() =>
+                ask('The 22-year-old building batteries from crop waste')
+              }
+            >
+              <span>STARTUPS</span>
+              <h3>The 22-year-old building batteries from crop waste</h3>
+              <p>
+                4 min read <ArrowUpRight size={16} />
+              </p>
+            </button>
+          </aside>
+        </section>
 
-      <section className="section briefs-section" id="quick-briefs"><header className="section-head"><div><span>01 / THE SHORT VERSION</span><h2>Featured Briefs</h2></div><a href="#">See all briefs <ArrowRight size={17}/></a></header><div className="brief-grid">{briefs.map((brief,i)=><button className={`brief-card ${brief.tone}`} onClick={()=>ask(brief.title)} key={brief.title}><div><span>{brief.tag}</span><small>{brief.time}</small></div><h3>{brief.title}</h3><p>{brief.note}</p><ArrowUpRight/></button>)}</div></section>
+        <section className="section briefs-section" id="quick-briefs">
+          <header className="section-head">
+            <div>
+              <span>01 / THE SHORT VERSION</span>
+              <h2>Featured Briefs</h2>
+            </div>
+            <a href="#">
+              See all briefs <ArrowRight size={17} />
+            </a>
+          </header>
+          <div className="brief-grid">
+            {briefs.map((brief, i) => (
+              <button
+                className={`brief-card ${brief.tone}`}
+                onClick={() => ask(brief.title)}
+                key={brief.title}
+              >
+                <div>
+                  <span>{brief.tag}</span>
+                  <small>{brief.time}</small>
+                </div>
+                <h3>{brief.title}</h3>
+                <p>{brief.note}</p>
+                <ArrowUpRight />
+              </button>
+            ))}
+          </div>
+        </section>
 
-      <div className="banner-ad"><span>ADVERTISEMENT</span><p>Build less busy days.</p><strong>NOTION CALENDAR</strong><a href="#">TRY IT FREE <ArrowUpRight size={15}/></a></div>
+        <div className="banner-ad">
+          <span>ADVERTISEMENT</span>
+          <p>Build less busy days.</p>
+          <strong>NOTION CALENDAR</strong>
+          <a href="#">
+            TRY IT FREE <ArrowUpRight size={15} />
+          </a>
+        </div>
 
-      <section className="section latest-section" id="full-stories"><header className="section-head crooked"><div><span>02 / FRESH OFF THE FEED</span><h2>Latest Stories</h2></div><a href="#">Everything new <ArrowRight size={17}/></a></header><div className="latest-layout"><div className="latest-list">{latest.map((story,i)=><button className={`latest-card layout-${i}`} onClick={()=>ask(story.title)} key={story.title}><img src={story.image} alt=""/><div><span>{story.tag}</span><h3>{story.title}</h3><p>{story.desc}</p><small>{story.time} · {i+1} hour{i?'s':''} ago</small></div><ArrowUpRight/></button>)}</div><aside className="trending" id="trending"><p>POPULAR RIGHT NOW <Sparkles size={14}/></p>{['What OpenAI’s new agent actually does','The ₹10 coffee that became a billion-rupee brand','Do we still need computer science degrees?','Inside India’s private space race','Your feed knows you too well'].map((story,i)=><button onClick={()=>ask(story)} key={story}><b>0{i+1}</b><span>{story}<small>{i%2?'STARTUPS':'TECH'} · {i+2} min</small></span></button>)}</aside></div></section>
+        <section className="section latest-section" id="full-stories">
+          <header className="section-head crooked">
+            <div>
+              <span>02 / FRESH OFF THE FEED</span>
+              <h2>Latest Stories</h2>
+            </div>
+            <a href="#">
+              Everything new <ArrowRight size={17} />
+            </a>
+          </header>
+          <div className="latest-layout">
+            <div className="latest-list">
+              {latest.map((story, i) => (
+                <button
+                  className={`latest-card layout-${i}`}
+                  onClick={() => ask(story.title)}
+                  key={story.title}
+                >
+                  <img src={story.image} alt="" />
+                  <div>
+                    <span>{story.tag}</span>
+                    <h3>{story.title}</h3>
+                    <p>{story.desc}</p>
+                    <small>
+                      {story.time} · {i + 1} hour{i ? 's' : ''} ago
+                    </small>
+                  </div>
+                  <ArrowUpRight />
+                </button>
+              ))}
+            </div>
+            <aside className="trending" id="trending">
+              <p>
+                POPULAR RIGHT NOW <Sparkles size={14} />
+              </p>
+              {[
+                'What OpenAI’s new agent actually does',
+                'The ₹10 coffee that became a billion-rupee brand',
+                'Do we still need computer science degrees?',
+                'Inside India’s private space race',
+                'Your feed knows you too well',
+              ].map((story, i) => (
+                <button onClick={() => ask(story)} key={story}>
+                  <b>0{i + 1}</b>
+                  <span>
+                    {story}
+                    <small>
+                      {i % 2 ? 'STARTUPS' : 'TECH'} · {i + 2} min
+                    </small>
+                  </span>
+                </button>
+              ))}
+            </aside>
+          </div>
+        </section>
 
-      <article className="sponsored-story"><div><span>SPONSORED STORY · WITH RAZORPAY</span><h2>The founders making “boring” businesses impossible to ignore</h2><p>Five operators on the everyday systems they rebuilt from scratch.</p><a href="#">Read the story <ArrowUpRight size={16}/></a></div><img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1000&q=80" alt="A startup team collaborating around a table"/></article>
+        <article className="sponsored-story">
+          <div>
+            <span>SPONSORED STORY · WITH RAZORPAY</span>
+            <h2>
+              The founders making “boring” businesses impossible to ignore
+            </h2>
+            <p>
+              Five operators on the everyday systems they rebuilt from scratch.
+            </p>
+            <a href="#">
+              Read the story <ArrowUpRight size={16} />
+            </a>
+          </div>
+          <img
+            src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1000&q=80"
+            alt="A startup team collaborating around a table"
+          />
+        </article>
 
-      <section className="section spaces-section" id="spaces"><header className="section-head"><div><span>03 / TAP IN, THEY’RE TALKING</span><h2>Spaces</h2></div><a href="#">View schedule <ArrowRight size={17}/></a></header><div className="spaces-grid"><article className="space-card live"><div className="live-label"><i/><span>LIVE NOW</span><div className="wave"><b/><b/><b/><b/></div></div><h3>Is the AI hype cycle finally getting useful?</h3><p>Hosted by Rhea & Kabir</p><div className="space-bottom"><div className="avatar-stack"><span>RK</span><span>KM</span><span>+89</span></div><button><Headphones size={15}/> Join Space</button></div></article><article className="space-card"><div className="live-label"><span>UP NEXT · 7:30 PM</span></div><h3>Building for Bharat beyond the buzzwords</h3><p>Hosted by Nikhil Kamath</p><div className="space-bottom"><div className="avatar-stack"><span>NK</span><span>AS</span></div><button className="outline"><Play size={14}/> Remind me</button></div></article><article className="space-card ended"><div className="live-label"><span>RECENTLY ENDED</span></div><h3>Does every startup need to become an AI startup?</h3><p>42 min · 1.2k listened</p><div className="space-bottom"><Users size={17}/><button className="text-button">Play replay <ChevronRight size={14}/></button></div></article></div></section>
+        <section className="section spaces-section" id="spaces">
+          <header className="section-head">
+            <div>
+              <span>03 / TAP IN, THEY’RE TALKING</span>
+              <h2>Spaces</h2>
+            </div>
+            <a href="#">
+              View schedule <ArrowRight size={17} />
+            </a>
+          </header>
+          <div className="spaces-grid">
+            <article className="space-card live">
+              <div className="live-label">
+                <i />
+                <span>LIVE NOW</span>
+                <div className="wave">
+                  <b />
+                  <b />
+                  <b />
+                  <b />
+                </div>
+              </div>
+              <h3>Is the AI hype cycle finally getting useful?</h3>
+              <p>Hosted by Rhea & Kabir</p>
+              <div className="space-bottom">
+                <div className="avatar-stack">
+                  <span>RK</span>
+                  <span>KM</span>
+                  <span>+89</span>
+                </div>
+                <button>
+                  <Headphones size={15} /> Join Space
+                </button>
+              </div>
+            </article>
+            <article className="space-card">
+              <div className="live-label">
+                <span>UP NEXT · 7:30 PM</span>
+              </div>
+              <h3>Building for Bharat beyond the buzzwords</h3>
+              <p>Hosted by Nikhil Kamath</p>
+              <div className="space-bottom">
+                <div className="avatar-stack">
+                  <span>NK</span>
+                  <span>AS</span>
+                </div>
+                <button className="outline">
+                  <Play size={14} /> Remind me
+                </button>
+              </div>
+            </article>
+            <article className="space-card ended">
+              <div className="live-label">
+                <span>RECENTLY ENDED</span>
+              </div>
+              <h3>Does every startup need to become an AI startup?</h3>
+              <p>42 min · 1.2k listened</p>
+              <div className="space-bottom">
+                <Users size={17} />
+                <button className="text-button">
+                  Play replay <ChevronRight size={14} />
+                </button>
+              </div>
+            </article>
+          </div>
+        </section>
 
-      <section className="newsletter"><span className="newsletter-spark">✳</span><p>ONE GOOD EMAIL. THAT’S IT.</p><h2>The day, distilled.<br/><em>No doomscroll required.</em></h2><form onSubmit={e=>e.preventDefault()}><label><span className="sr-only">Email address</span><input type="email" placeholder="you@somewhere.com" required/></label><button>Count me in <ArrowUpRight size={17}/></button></form><small>Five minutes. Every weekday. Unsubscribe whenever—you know the drill.</small></section>
-    </div>
-    <footer><div><Wordmark/><p>Understand more. Scroll less.</p></div><div>{['About','Team','Advertise','Write for us','Privacy'].map(x=><a href="#" key={x}>{x}</a>)}</div><div><span>© 2026 CIE Daily</span><p>Made with curiosity in India.</p></div></footer>
+        <section className="newsletter">
+          <span className="newsletter-spark">✳</span>
+          <p>ONE GOOD EMAIL. THAT’S IT.</p>
+          <h2>
+            The day, distilled.
+            <br />
+            <em>No doomscroll required.</em>
+          </h2>
+          <form onSubmit={(e) => e.preventDefault()}>
+            <label>
+              <span className="sr-only">Email address</span>
+              <input type="email" placeholder="you@somewhere.com" required />
+            </label>
+            <button>
+              Count me in <ArrowUpRight size={17} />
+            </button>
+          </form>
+          <small>
+            Five minutes. Every weekday. Unsubscribe whenever—you know the
+            drill.
+          </small>
+        </section>
+      </div>
+      <footer>
+        <div>
+          <Wordmark />
+          <p>Understand more. Scroll less.</p>
+        </div>
+        <div>
+          {['About', 'Team', 'Advertise', 'Write for us', 'Privacy'].map(
+            (x) => (
+              <a href="#" key={x}>
+                {x}
+              </a>
+            ),
+          )}
+        </div>
+        <div>
+          <span>© 2026 CIE Daily</span>
+          <p>Made with curiosity in India.</p>
+        </div>
+      </footer>
 
-    {choice&&<div className="choice-backdrop" onClick={()=>setChoice(null)}><section className="choice-sheet" role="dialog" aria-modal="true" aria-labelledby="choice-title" onClick={e=>e.stopPropagation()}><button className="close-choice" onClick={()=>setChoice(null)} aria-label="Close"><X/></button><span className="choice-kicker">YOU’VE GOT OPTIONS</span><h2 id="choice-title">How do you want this story?</h2><p className="choice-story">{choice}</p><div className="choice-panels"><a href="#brief"><Zap/><span><b>JUST THE POINT</b><small>Quick Summary · ~20 sec</small></span><ArrowUpRight/></a><a href="/story"><ArrowUpRight/><span><b>TAKE ME DEEPER</b><small>Full Article · Full context</small></span><ArrowUpRight/></a></div><small className="choice-note">No wrong answers. Just different attention spans.</small></section></div>}
-  </main>;
+      {choice && (
+        <div className="choice-backdrop" onClick={() => setChoice(null)}>
+          <section
+            className="choice-sheet"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="choice-title"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="close-choice"
+              onClick={() => setChoice(null)}
+              aria-label="Close"
+            >
+              <X />
+            </button>
+            <span className="choice-kicker">YOU’VE GOT OPTIONS</span>
+            <h2 id="choice-title">How do you want this story?</h2>
+            <p className="choice-story">{choice}</p>
+            <div className="choice-panels">
+              <a href="/brief">
+                <Zap />
+                <span>
+                  <b>JUST THE POINT</b>
+                  <small>Quick Summary · ~20 sec</small>
+                </span>
+                <ArrowUpRight />
+              </a>
+              <a href="/story">
+                <ArrowUpRight />
+                <span>
+                  <b>TAKE ME DEEPER</b>
+                  <small>Full Article · Full context</small>
+                </span>
+                <ArrowUpRight />
+              </a>
+            </div>
+            <small className="choice-note">
+              No wrong answers. Just different attention spans.
+            </small>
+          </section>
+        </div>
+      )}
+    </main>
+  );
 }
