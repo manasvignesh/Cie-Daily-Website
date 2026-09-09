@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:sites": "vinext build",
     "start": "next start",
     "lint": "oxlint",
     "format": "oxfmt"
