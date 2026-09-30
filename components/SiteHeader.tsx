@@ -11,6 +11,7 @@ const links = [
   ['Full Stories', '/stories'],
   ['Startups', '/startups'],
   ['Spaces', '/spaces'],
+  ['Contact', '/breakpoint/contact'],
 ];
 
 export function Wordmark() {

@@ -356,7 +356,14 @@ export function EditorialFeed({ topic = 'latest' }: { topic?: string }) {
           <p>Understand more. Scroll less.</p>
         </div>
         <p>Every published story. One live newsroom.</p>
-        <span>© 2026 CIE Daily · Made with curiosity in India.</span>
+        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', fontSize: '0.85rem' }}>
+          <Link href="/breakpoint/contact">Contact & Editorial Info</Link>
+          <span>·</span>
+          <Link href="/breakpoint/privacy-policy">Privacy Policy</Link>
+          <span>·</span>
+          <Link href="/breakpoint/editorial-policy">Editorial Policy</Link>
+        </div>
+        <span>© 2026 Breakpoint · Operated by Manas Vignesh Varma</span>
       </footer>
     </main>
   );

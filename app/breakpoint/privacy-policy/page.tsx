@@ -1,10 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
-import { Wordmark } from '@/components/SiteHeader';
-
 export const metadata: Metadata = {
-  title: 'Breakpoint Privacy Policy',
+  title: 'Breakpoint — Privacy Policy',
   description:
     'Privacy Policy for the Breakpoint mobile application published on Google Play by Manas Vignesh Varma.',
   robots: {
@@ -107,34 +105,45 @@ const sections = [
 
 export default function BreakpointPrivacyPolicy() {
   return (
-    <main className="min-h-screen bg-[var(--paper)] text-[var(--ink)]">
-      <header className="mx-auto flex max-w-5xl items-center justify-between border-b border-[var(--line)] px-5 py-5">
-        <Wordmark />
+    <main className="policy-page privacy-page">
+      <header className="policy-header">
         <Link
-          href="/"
-          className="border-b-2 border-[var(--orange)] pb-1 text-xs font-black tracking-[0.12em] uppercase"
+          href="/breakpoint/contact"
+          className="policy-brand"
+          aria-label="Breakpoint contact home"
         >
-          CIE Daily
+          Breakpoint
         </Link>
+        <nav className="policy-nav" aria-label="Breakpoint policies">
+          <Link href="/breakpoint/contact" className="font-semibold text-[var(--muted)] hover:text-[var(--ink)]">
+            Contact
+          </Link>
+          <Link href="/breakpoint/editorial-policy" className="font-semibold text-[var(--muted)] hover:text-[var(--ink)]">
+            Editorial Policy
+          </Link>
+          <Link href="/" className="border-b-2 border-[var(--orange)] pb-1 font-black tracking-[0.12em] uppercase">
+            CIE Daily
+          </Link>
+        </nav>
       </header>
-      <article className="mx-auto max-w-4xl px-5 py-12 sm:py-16">
-        <p className="mb-4 text-xs font-black tracking-[0.14em] text-[var(--orange)] uppercase">
+      <article className="policy-article">
+        <p className="policy-kicker">
           Effective {effectiveDate}
         </p>
-        <h1 className="mb-6 font-[var(--serif)] text-5xl leading-none font-bold tracking-normal sm:text-7xl">
+        <h1 className="policy-title">
           Breakpoint — Privacy Policy
         </h1>
-        <p className="mb-5 max-w-3xl font-[var(--serif)] text-2xl leading-snug text-[var(--ink)]">
+        <p className="policy-lede">
           Breakpoint is a mobile application developed and published on Google
           Play by Manas Vignesh Varma.
         </p>
-        <p className="mb-12 border-l-4 border-[var(--orange)] bg-[var(--paper-2)] px-5 py-4 text-base leading-7 text-[var(--muted)]">
+        <p className="policy-note">
           This page is hosted on the CIE Daily website for the Breakpoint mobile
           app. It is public, does not require login, and is intended to identify
           the app and developer clearly for Google Play users.
         </p>
 
-        <div className="grid gap-10">
+        <div className="policy-sections">
           {sections.map(([title, paragraphs]) => (
             <section key={title}>
               <h2 className="mb-4 border-t border-[var(--line)] pt-6 font-[var(--serif)] text-3xl leading-tight font-bold tracking-normal">
@@ -152,6 +161,18 @@ export default function BreakpointPrivacyPolicy() {
           ))}
         </div>
       </article>
+      <footer className="policy-footer">
+        <div className="mx-auto max-w-5xl space-y-2 px-5">
+          <p>© 2026 Breakpoint · Operated by Manas Vignesh Varma</p>
+          <nav aria-label="Breakpoint policy links">
+            <Link href="/breakpoint/contact" className="hover:text-[var(--ink)]">Contact Us</Link>
+            <span>·</span>
+            <Link href="/breakpoint/privacy-policy" className="hover:text-[var(--ink)]">Privacy Policy</Link>
+            <span>·</span>
+            <Link href="/breakpoint/editorial-policy" className="hover:text-[var(--ink)]">Editorial Policy</Link>
+          </nav>
+        </div>
+      </footer>
     </main>
   );
 }
